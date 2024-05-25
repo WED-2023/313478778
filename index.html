@@ -2,9 +2,12 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
-<div id="menu">
+  <div id="fb-root"></div>
+  <div id="menu">
 <li><a href="#about">About Me</a></li>
 <li><a href="#photos">My Photos</a></li>
 <li><a href="#playlist">My Playlist</a></li>
@@ -31,95 +34,55 @@
 <br/>
 <br/>
 <br/>
-about me
+<h2>about me</h2>
+My name is Naum Segal, i just turned 90 years old
 <br/>
 <br/>
 <br/>
 </section>
 
 <section id="photos" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-my photos
-<br/>
-<br/>
-<br/>
+  <h2>My Photos</h2>
+  <div class="photo-gallery">
+      <img src="Photos/p1.jpg" alt="Photo 1">
+      <img src="Photos/p2.jpg" alt="Photo 2">
+      <img src="Photos/p3.jpg" alt="Photo 3">
+      <img src="Photos/p4.jpg" alt="Photo 4">
+      <img src="Photos/p5.jpg" alt="Photo 5">
+      <img src="Photos/p6.jpg" alt="Photo 6">
+      <img src="Photos/p7.jpg" alt="Photo 7">
+      <img src="Photos/p8.jpg" alt="Photo 8">
+      <img src="Photos/p9.jpg" alt="Photo 9">
+      <img src="Photos/p10.jpg" alt="Photo 10">
+      <img src="Photos/p11.jpg" alt="Photo 11">
+      <img src="Photos/p12.jpg" alt="Photo 12">
+  </div>
 </section>
 
 <section id="playlist" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-my playlist
-<br/>
-<br/>
-<br/>
+  <h2>My Playlist</h2>
+  <div class="responsive-iframe">
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/v-0xugvRnUg?si=1wF-fU9BM1uPs2yV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+  
+  </div>
 </section>
 
 <section id="like" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-give me a like
-<br/>
-<br/>
-<br/>
+  <h2>Give Me a Like</h2>
+  <div class="like" data-post-id="7712"> 
+    <div class="like-ratings-container">
+      <div class="like-rating">
+        <span class="like-rating-button material-icons">thumb_up</span>
+        <span class="like-rating-count">0</span>
+      </div>
+    </div>
+  </div>
 </section>
 
+
+
+
 <section id="qrcoder" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 <br/>
 <br/>
 <br/>
@@ -190,4 +153,39 @@ $(function(){
  });​
  </script>
 </body>
+<script>
+  document.querySelectorAll("#like .like").forEach(like => {
+  const postId = like.dataset.postId;
+  const button = like.querySelector(".like-rating-button");
+  const count = like.querySelector(".like-rating-count");
+
+  button.addEventListener("click", async () => {
+    if (button.parentElement.classList.contains("like-rating-selected")) {
+      return;
+    }
+
+    count.textContent = Number(count.textContent) + 1;
+    like.querySelectorAll(".like-rating").forEach(rating => {
+      if (rating.classList.contains("like-rating-selected")) {
+        const count = rating.querySelector(".like-rating-count");
+
+        count.textContent = Math.max(0, Number(count.textContent) - 1);
+        rating.classList.remove("like-rating-selected");
+      }
+    });
+
+    button.parentElement.classList.add("like-rating-selected");
+
+    try {
+      const response = await fetch(`/posts/${postId}/like`, { method: "POST" });
+      const body = await response.json();
+      console.log(body);
+    } catch (error) {
+      console.error("Failed to update like count:", error);
+    }
+  });
+});
+
+</script>
+
 </html>
