@@ -62,38 +62,3 @@
     height: 100%;
 }
 
-.like {
-	width: 400px;
-	font-family: 'Lexend', sans-serif;
-}
-
-.like-ratings-container {
-	display: flex;
-	justify-content: end;
-	padding: 12px 0;
-}
-
-.like-rating {
-	display: flex;
-	align-items: center;
-	cursor: default;
-}
-
-.like-rating:not(:last-child) {
-	margin-right: 12px;
-}
-
-.like-rating-selected > .like-rating-button,
-.like-rating-selected > .like-rating-count {
-	color: #009578;
-}
-
-.like-rating-button {
-	margin-right: 6px;
-	cursor: pointer;
-	color: #555555;
-}
-
-.like-rating:not(.like-rating-selected) > .like-rating-button:hover {
-	color: #000000;
-}

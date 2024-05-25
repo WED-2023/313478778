@@ -2,12 +2,11 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
 <body>
   <div id="fb-root"></div>
-  <div id="menu">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0" nonce="gRZVAv3e"></script>
+<div id="menu">
 <li><a href="#about">About Me</a></li>
 <li><a href="#photos">My Photos</a></li>
 <li><a href="#playlist">My Playlist</a></li>
@@ -69,20 +68,24 @@ My name is Naum Segal, i just turned 90 years old
 
 <section id="like" class="section">
   <h2>Give Me a Like</h2>
-  <div class="like" data-post-id="7712"> 
-    <div class="like-ratings-container">
-      <div class="like-rating">
-        <span class="like-rating-button material-icons">thumb_up</span>
-        <span class="like-rating-count">0</span>
-      </div>
-    </div>
-  </div>
+  <div class="fb-like" data-href="https://www.facebook.com/Rishonchess" data-width="7" data-layout="" data-action="" data-size="" data-share="false"></div>
 </section>
 
 
-
-
 <section id="qrcoder" class="section">
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
@@ -153,39 +156,4 @@ $(function(){
  });​
  </script>
 </body>
-<script>
-  document.querySelectorAll("#like .like").forEach(like => {
-  const postId = like.dataset.postId;
-  const button = like.querySelector(".like-rating-button");
-  const count = like.querySelector(".like-rating-count");
-
-  button.addEventListener("click", async () => {
-    if (button.parentElement.classList.contains("like-rating-selected")) {
-      return;
-    }
-
-    count.textContent = Number(count.textContent) + 1;
-    like.querySelectorAll(".like-rating").forEach(rating => {
-      if (rating.classList.contains("like-rating-selected")) {
-        const count = rating.querySelector(".like-rating-count");
-
-        count.textContent = Math.max(0, Number(count.textContent) - 1);
-        rating.classList.remove("like-rating-selected");
-      }
-    });
-
-    button.parentElement.classList.add("like-rating-selected");
-
-    try {
-      const response = await fetch(`/posts/${postId}/like`, { method: "POST" });
-      const body = await response.json();
-      console.log(body);
-    } catch (error) {
-      console.error("Failed to update like count:", error);
-    }
-  });
-});
-
-</script>
-
 </html>
