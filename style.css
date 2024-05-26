@@ -13,6 +13,19 @@ section h2 {
     line-height: 2em; 
 }
 
+.section {
+    text-align: center;
+}
+
+.section img,
+.section iframe,
+.section form,
+.section table {
+    margin: 0 auto; 
+    display: block; 
+}
+
+
 section h2::before,
 section h2::after {
     content: ''; 
@@ -106,6 +119,9 @@ section h2::after {
 .responsive-iframe {
     position: relative;
     padding-top: 20%; 
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
     height: 0;
 }
 
